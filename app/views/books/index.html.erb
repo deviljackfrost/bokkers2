@@ -1,0 +1,56 @@
+<html>
+  <head>
+
+  </head>
+  
+<div class = "book">
+  <div class = "body">
+<%= flash[:notice] %>
+<div class = "profile">
+
+<p><%= image_tag current_user.get_image %></p>
+
+<h1><%= current_user.name %></h1>
+
+<h2>introduction: <%= current_user.introduction %></h2>
+
+</div>
+<set>
+<i class="fa-solid fa-user-pen"><%= link_to 'settig', edit_user_path(current_user) %>
+</i>
+</set>
+
+<%= form_with model: @book do |f| %>
+<h1>投稿</h1>
+<% alert %>
+  <h4>title</h4>
+  <%= f.text_field :title %>
+  <h4>caption</h4>
+  <%= f.text_area :caption %>
+  <%= f.submit '投稿' %>
+<% end %>
+</div>
+
+
+<div class = 'main' >
+<% @books.each do |book| %>
+  <div class = 'main-content' >
+    <div class = 'contents' >
+    <p>title：<%= book.title %></p>
+    <p>caption：<%= book.caption %></p>
+    <p>name：<%= book.user.name %></p>
+    </div>
+    <div class = 'contents' >
+   <% if book.user == current_user %>
+     <%= link_to "edit", edit_book_path(book.id) %>
+     <%= link_to 'delete', book, method: :delete %>
+  <% end %>
+  </div> 
+  </div>
+<% end %>
+
+<%= paginate @books %>
+
+</div>
+</div>
+</html>

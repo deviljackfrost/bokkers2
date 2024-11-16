@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booker2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/353e4c8b8d.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+        <% if user_signed_in? %>
+  <h3>
+    
+      <i class="fa-solid fa-house">
+        <%= link_to "log out", destroy_user_session_path, method: :delete %>
+      </i>
+      <br/>
+        <i class="fa-solid fa-house">
+        <%= link_to "home", books_path %>
+        </i>
+        <br/>
+        <i class="fa-solid fa-users">
+       <%= link_to "user", user_path(current_user) %>
+      </i>
+      </h3>
+    <% else %>
+    <header>
+    
+    <i class="fa-solid fa-house">
+        <%= link_to "home", root_path %>
+    </i>
+     </br>
+    <i class="fa-solid fa-link">
+     <%= link_to "about", homes_about_path %>
+    </i>
+     </br>
+      <i class="fa-solid fa-user-plus">
+        <%= link_to "sign up", new_user_registration_path %>
+      </i>
+      </br>
+      <i class="fa-solid fa-right-to-bracket">
+        <%= link_to "log in", new_user_session_path %>
+      </i>
+      
+      </header>
+    <% end %>
+  </header>
+
+    <%= yield %>
+  </body>
+</html>
